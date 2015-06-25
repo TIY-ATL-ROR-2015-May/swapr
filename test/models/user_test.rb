@@ -3,9 +3,13 @@ require 'test_helper'
 class UserTest < ActiveSupport::TestCase
   test "users must have email and password" do
     u = User.new(email: 'cookies')
-    refute u.save
+    assert_raises(ActiveRecord::RecordInvalid) { u.save! }
+    assert_not_empty u.errors.messages[:password]
+
     u = User.new(password: 'pooches')
-    refute u.save
+    assert_raises(ActiveRecord::RecordInvalid) { u.save! }
+    assert_not_empty u.errors.messages[:email]
+
     u = User.new(email: 'foo@bar.com',
                  password: 'dogsandstuff')
     assert u.save
@@ -15,6 +19,7 @@ class UserTest < ActiveSupport::TestCase
     u = User.new(email: 'no_at_symbol',
                  password: 'cookies')
     refute u.save
+    assert_not_empty u.errors.messages[:email]
   end
 
   test "users get access token on save" do

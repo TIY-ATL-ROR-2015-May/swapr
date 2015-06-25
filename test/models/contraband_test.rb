@@ -40,17 +40,17 @@ class ContrabandTest < ActiveSupport::TestCase
     cb = Contraband.new(@file_attrs)
     assert cb.save
 
-    cb.contraband_file_size = 10999999
+    cb.upload_file_size = 10999999
     refute cb.save
   end
 
   def initialize_example_attrs
     @file_attrs = {
       user_id: 1,
-      contraband_file_size: 8888888,
-      contraband_file_name: 'foo.bar',
-      contraband_updated_at: DateTime.now,
-      contraband_content_type: 'text/bar',
+      upload_file_size: 8888888,
+      upload_file_name: 'foo.bar',
+      upload_updated_at: DateTime.now,
+      upload_content_type: 'text/bar',
       curation: curations(:brits_music)
     }
   end
