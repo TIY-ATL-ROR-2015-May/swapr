@@ -30,7 +30,7 @@ gem 'aws-sdk'
 # Let's use paperclip to manage our files.
 gem 'paperclip'
 # We should be able to organize files in a coherent way tho.
-gem 'acts_as_tree'
+gem 'awesome_nested_set'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
