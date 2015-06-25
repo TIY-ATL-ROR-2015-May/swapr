@@ -4,6 +4,12 @@ Rails.application.routes.draw do
 
   post 'users/register', to: 'users#register'
 
+  # routes for folders
+  resources :folders, only: [:create, :delete, :show, :index] do
+    # routes for files
+    resources :files, only: [:create, :show, :update, :delete]
+  end
+
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
 
