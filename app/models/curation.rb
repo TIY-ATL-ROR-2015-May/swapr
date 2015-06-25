@@ -1,6 +1,6 @@
 class Curation < ActiveRecord::Base
   belongs_to :user
-  has_many :contrabands
+  has_many :contrabands, dependent: :destroy
 
   acts_as_tree order: 'name'
 
