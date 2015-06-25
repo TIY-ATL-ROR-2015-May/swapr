@@ -16,6 +16,7 @@ class FoldersController < ApplicationController
     # @folder = Curation.create(name: params[:name],
     #                           user: current_user)
     @folder = current_user.curations.new(name: params[:name])
+
     if @folder.save
       @folder.move_to_child_of(parent) if parent_id && parent
       render json: { folder: @folder }, status: :created
