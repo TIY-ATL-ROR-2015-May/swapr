@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150625134448) do
+ActiveRecord::Schema.define(version: 20150625151456) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,11 +34,16 @@ ActiveRecord::Schema.define(version: 20150625134448) do
     t.string   "name"
     t.integer  "user_id"
     t.integer  "parent_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.integer  "lft"
+    t.integer  "rgt"
+    t.integer  "depth",      default: 0, null: false
   end
 
+  add_index "curations", ["depth"], name: "index_curations_on_depth", using: :btree
   add_index "curations", ["parent_id"], name: "index_curations_on_parent_id", using: :btree
+  add_index "curations", ["rgt"], name: "index_curations_on_rgt", using: :btree
   add_index "curations", ["user_id"], name: "index_curations_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|

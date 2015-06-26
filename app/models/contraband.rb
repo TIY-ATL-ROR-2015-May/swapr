@@ -8,6 +8,7 @@ class Contraband < ActiveRecord::Base
   has_attached_file :upload
   validates_attachment :upload, presence: true,
     size: { in: 0..10.megabytes }
+  do_not_validate_attachment_file_type :upload
 
   validates :upload_file_name, uniqueness: { scope: :curation_id }
   ## TODO: Make sure file name conflicts aren't possible.

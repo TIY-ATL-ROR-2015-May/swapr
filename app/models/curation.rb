@@ -1,8 +1,9 @@
 class Curation < ActiveRecord::Base
-  belongs_to :user
-  has_many :contrabands
+  acts_as_nested_set
 
-  acts_as_tree order: 'name'
+  belongs_to :user
+  has_many :contrabands, dependent: :destroy
+
 
   validates :name, presence: true, uniqueness: {
     scope: :parent_id, message: "only one per folder"
